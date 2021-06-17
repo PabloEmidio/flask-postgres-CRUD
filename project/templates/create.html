@@ -14,10 +14,13 @@
         <a href="/message/" class="create">Create</a>
     </header>
     <form class="form" action="/message/create/" method="post">
-        <label>Title: <br><input type="text" name="title" id="title" required></label>
-        <label>Author: <br><input type="text" name="author" id="author" required></label>
-        <label>Message: <br><textarea name="message" id="message" cols="30" rows="10" required></textarea></label>
+        <label>Title: <br><input type="text" name="title" id="title" maxlength="30" required></label>
+        <label>Author: <br><input type="text" name="author" id="author" maxlength="30" required></label>
+        <label>Message: <br><textarea name="message" id="message" cols="30" rows="10" maxlength="200" required></textarea></label>
         <button>CREATE</button>
+        {% if warning %}
+        <p style="color: red;margin-top: 5px;">{{warning}}</p>
+        {% endif %}
     </form>
 </body>
 </html>

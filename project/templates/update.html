@@ -21,9 +21,9 @@
             <p class="message">{{ message[3] }}</p>
 
             <form class="form" action="/message/update/{{ message[0] }}/" method="post">
-                <label>Title: <br><input type="text" name="title" id="title"></label>
-                <label>Author: <br><input type="text" name="author" id="author"></label>
-                <label>Message: <br><textarea name="message" id="message" cols="30" rows="10"></textarea></label>
+                <label>Title: <br><input type="text" name="title" id="title" maxlength="30"></label>
+                <label>Author: <br><input type="text" name="author" id="author" maxlength="30"></label>
+                <label>Message: <br><textarea name="message" id="message" cols="30" rows="10" maxlength="200"></textarea></label>
                 <button>UPDATE</button>
             </form>
             {% if blank %}

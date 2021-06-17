@@ -8,7 +8,7 @@ def init_app(app: Flask):
     
     @app.route('/')
     def index():
-        return redirect('messages/')
+        return redirect('/messages/')
 
     @app.route('/messages/', methods=['GET'])
     def get_messages():
@@ -24,6 +24,16 @@ def init_app(app: Flask):
             message_json['author_name'] = request.form['author']
             message_json['message_text'] = request.form['message']
             message_json['creation_date'] = str(datetime.now().date())
+            warning = ''
+            if len(message_json['message_title'])>30:
+                warning = 'Title must not have more than 30 character'
+                return render_template('create.html', warning=warning)
+            if len(message_json['author_name'])>30:
+                warning = 'Author must not have more than 30 character'
+                return render_template('create.html', warning=warning)
+            if len(message_json['message_text'])>200:
+                warning = 'Message must not have more than 200 character'
+                return render_template('create.html', warning=warning)
             dbobj = AccessDataBase()
             dbobj.write_data(message_json)
             create_now = dbobj.get_data()[-1][0]
@@ -44,13 +54,23 @@ def init_app(app: Flask):
                 not message_json['author_name'] and \
                 not message_json['message_text']:
                 return render_template('update.html', messages=message, blank=True)
+            warning = ''
             if message_json['message_title']:
+                if len(message_json['message_title'])>30:
+                    warning = 'Title must not have more than 30 character'
+                    return render_template('create.html', warning=warning)
                 args = ['message_title', message_json['message_title']]
                 dbobj.update(message_id, args)
             if message_json['author_name']:
+                if len(message_json['author_name'])>30:
+                    warning = 'Author must not have more than 30 character'
+                    return render_template('create.html', warning=warning)
                 args = ['author_name', message_json['author_name']]
                 dbobj.update(message_id, args)
             if message_json['message_text']:
+                if len(message_json['message_text'])>200:
+                    warning = 'Message must not have more than 200 character'
+                    return render_template('create.html', warning=warning)
                 args = ['message_text', message_json['message_text']]
                 dbobj.update(message_id, args)
             return redirect(f'/message/{message_id}/')
