@@ -3,12 +3,13 @@
 ## A basic CRUD application built in flask using postgres as database
 
 # Taks list
-- [x] Config files
-- [x] Database class/access
-- [x] CRUD routes
-- [x] Basic frontend files to view application
 - [x] Dockerfile
 - [x] Initial docker-compose - It is working
+- [x] Database class/access
+- [x] Config files
+- [x] Flask initial configs
+- [x] CRUD routes
+- [x] Basic frontend files to view application
 - [ ] PyTest - In development
 - [ ] CRUD revision - better management
 - [ ] Advanced frontend
