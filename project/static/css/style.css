@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+
+a{
+    text-decoration: none;
+    padding: 5px;
+    color: #fff;
+}
+
+a:hover{
+    text-decoration: underline;
+    color: #aaa;
+}
+
+.header{
+    /* padding: 30px; */
+    margin-bottom: 15px;
+    background-color: brown;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.messages{
+    text-align: center;
+    margin: 40px 0;
+}
+
+form{
+    margin-top: 5px;
+    display: inline-block;
+}
+
+button{
+    padding: 4px 5px;
+}
+/* .message{
+       width: 200px;
+
+} */

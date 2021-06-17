@@ -1,0 +1,10 @@
+.form{
+    display: block;
+    text-align: center;
+}
+
+label{
+    text-align: center;
+    display: block;
+    padding: 20px;
+}
