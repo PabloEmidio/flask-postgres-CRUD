@@ -15,10 +15,12 @@
     {% for message in messages %}
         <div class="messages">
             <h1 class="title">{{ message[1] }}</h1> 
+            {% if access_route %}
             <p class="date">Create Data -&gt; {{ message[4] }}</p>
+            {% endif %}
             <p class="author">author: {{ message[2] }}</p> 
             <p class="message">{{ message[3] }}</p>
-            {% if messages|length > 1 %}
+            {% if not access_route %}
             <form action="/message/{{ message[0] }}/" method="get">
                 <button>see</button>
             </form>

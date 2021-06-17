@@ -86,4 +86,4 @@ def init_app(app: Flask):
             return redirect('/messages/')
         else:
             message = dbobj.get_data(message_id)
-            return render_template('index.html', messages=message) if message else 'Not Found', 404
+            return render_template('index.html', messages=message, access_route=True) if message else 'Not Found', 404
