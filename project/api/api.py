@@ -20,9 +20,9 @@ def init_app(app: Flask):
     def insert_message():
         if request.method == 'POST':
             message_json = {}
-            message_json['message_title'] = request.form['title']
-            message_json['author_name'] = request.form['author']
-            message_json['message_text'] = request.form['message']
+            message_json['message_title'] = request.form['title'].strip()
+            message_json['author_name'] = request.form['author'].strip()
+            message_json['message_text'] = request.form['message'].strip()
             message_json['creation_date'] = str(datetime.now().date())
             if not message_json['message_title'] and \
                 not message_json['author_name'] and \
@@ -52,9 +52,9 @@ def init_app(app: Flask):
         message = dbobj.get_data(message_id)
         if request.method == 'POST':
             message_json = {}
-            message_json['message_title'] = request.form['title']
-            message_json['author_name'] = request.form['author']
-            message_json['message_text'] = request.form['message']
+            message_json['message_title'] = request.form['title'].strip()
+            message_json['author_name'] = request.form['author'].strip()
+            message_json['message_text'] = request.form['message'].strip()
             if not message_json['message_title'] and \
                 not message_json['author_name'] and \
                 not message_json['message_text']:
