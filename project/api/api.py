@@ -24,8 +24,8 @@ def init_app(app: Flask):
             message_json['author_name'] = request.form['author'].strip()
             message_json['message_text'] = request.form['message'].strip()
             message_json['creation_date'] = str(datetime.now().date())
-            if not message_json['message_title'] and \
-                not message_json['author_name'] and \
+            if not message_json['message_title'] or \
+                not message_json['author_name'] or \
                 not message_json['message_text']:
                 warning = 'It must not have blank field blank'
                 return render_template('create.html', warning=warning)
