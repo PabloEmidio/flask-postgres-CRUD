@@ -16,7 +16,7 @@
   - [ ] Bootstrap - CSS framework
   - [ ] JS - framework is being chosen
 - [ ] Dockerfile/dockercompose adjusts - It will be necessary because futures features
-- [ ] Free hosting on [herokuapp.com/](https://herokuapp.com/) - Whatever I hosting before done
+- [ ] Free hosting on [herokuapp.com/](https://herokuapp.com/) - ~~Whatever I hosting before done~~ - Well, I did! [current version link](https://flask-postgres-crud.herokuapp.com/messages/)
 
 # How to test now
 ## Make the following steps to debug this application inside a [docker container](https://docs.docker.com/get-started/)

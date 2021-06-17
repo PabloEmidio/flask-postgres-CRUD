@@ -24,7 +24,6 @@ def init_app(app: Flask):
             message_json['author_name'] = request.form['author']
             message_json['message_text'] = request.form['message']
             message_json['creation_date'] = str(datetime.now().date())
-            print(message_json)
             dbobj = AccessDataBase()
             dbobj.write_data(message_json)
             create_now = dbobj.get_data()[-1][0]
@@ -41,11 +40,9 @@ def init_app(app: Flask):
             message_json['message_title'] = request.form['title']
             message_json['author_name'] = request.form['author']
             message_json['message_text'] = request.form['message']
-            print(message_json)
             if not message_json['message_title'] and \
                 not message_json['author_name'] and \
                 not message_json['message_text']:
-                print('got')
                 return render_template('update.html', messages=message, blank=True)
             if message_json['message_title']:
                 args = ['message_title', message_json['message_title']]
