@@ -24,6 +24,11 @@ def init_app(app: Flask):
             message_json['author_name'] = request.form['author']
             message_json['message_text'] = request.form['message']
             message_json['creation_date'] = str(datetime.now().date())
+            if not message_json['message_title'] and \
+                not message_json['author_name'] and \
+                not message_json['message_text']:
+                warning = 'It must not have blank field blank'
+                return render_template('create.html', warning=warning)
             warning = ''
             if len(message_json['message_title'])>30:
                 warning = 'Title must not have more than 30 character'
