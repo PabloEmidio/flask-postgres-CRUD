@@ -13,7 +13,7 @@ class AccessDataBase:
     db_info.read('project/db/resources/database.ini')
     logger.debug('database.ini got')
     postgres_access = {value[0]: value[1] for value in db_info.items('POSTGRES_CONNECT')}
-    if new_value := os.environ.get('DATABASE_URL'):
+    if new_value := os.environ.get('DATABASE_HOST'):
         postgres_access['host'] = new_value
     if new_value := os.environ.get('DATABASE_PASSWORD'):
         postgres_access['password'] = new_value
