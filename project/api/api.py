@@ -43,8 +43,8 @@ def init_app(app: Flask):
             message_json['message_text'] = request.form['message']
             print(message_json)
             if not message_json['message_title'] and \
-                not message_json['message_title'] and \
-                not message_json['message_title']:
+                not message_json['author_name'] and \
+                not message_json['message_text']:
                 print('got')
                 return render_template('update.html', messages=message, blank=True)
             if message_json['message_title']:
