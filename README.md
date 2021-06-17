@@ -1,7 +1,6 @@
 # flask-postgres-CRUD
 
-# About
-  A basic CRUD application built in flask using postgres as database
+## A basic CRUD application built in flask using postgres as database
 
 # Taks list
 - [x] Config files
