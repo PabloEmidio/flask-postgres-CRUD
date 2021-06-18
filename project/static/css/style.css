@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+body{
+    padding: 0 0 30px 0;
+}
+
 
 a{
     text-decoration: none;
@@ -25,7 +29,7 @@ a:hover{
     top: 0;
 }
 
-.messages{
+.message{
     text-align: center;
     margin: 40px 0;
 }
@@ -38,7 +42,15 @@ form{
 button{
     padding: 4px 5px;
 }
-/* .message{
-       width: 200px;
 
-} */
+.warning{
+    color: #922;
+}
+
+.margin-30-vh{
+    margin: 30vh;
+}
+
+.center{
+    text-align: center;
+}
