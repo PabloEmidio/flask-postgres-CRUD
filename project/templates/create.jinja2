@@ -1,0 +1,17 @@
+{% extends 'layout.jinja2' %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+{% block content %}
+<form class="form" action="/message/create/" method="post">
+    <label>Title: <br><input type="text" name="title" id="title" maxlength="30" required></label>
+    <label>Author: <br><input type="text" name="author" id="author" maxlength="30" required></label>
+    <label>Message: <br><textarea name="message" id="message" cols="30" rows="10" maxlength="200" required></textarea></label>
+    <button>CREATE</button>
+    {% if warning %}
+    <p class="warning center">{{warning}}</p>
+    {% endif %}
+</form>
+{% endblock %}
