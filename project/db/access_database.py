@@ -2,6 +2,7 @@ import logging
 import logging.config
 import configparser
 import os
+from typing import List, Union
 
 import psycopg2
 
@@ -30,7 +31,7 @@ class AccessDataBase:
         cursor = conn.cursor()
         query = f'''CREATE TABLE IF NOT EXISTS {self.table_name}(
                     message_id SERIAL PRIMARY KEY NOT NULL,
-                    message_title varchar(30) NOT NULL,
+                    message_title varchar(30) NOT NULL UNIQUE,
                     author_name varchar(30) NOT NULL,
                     message_text varchar(200) NOT NULL,
                     creation_date date NOT NULL)'''
@@ -79,13 +80,13 @@ class AccessDataBase:
         conn.commit()
         
         
-    def get_data(self, message_id: int=0):
+    def get_data(self, target_query: List[Union[int, str]]=[]):
         self.logger.debug('GETTING DATAS')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
         cursor = conn.cursor()
-        if not message_id: select_query = f'select * from {self.table_name};'
-        else: select_query = f'select * from {self.table_name} where message_id = {message_id};'
+        if not target_query: select_query = f'select * from {self.table_name};'
+        else: select_query = f"select * from {self.table_name} where {target_query[0]} = '{target_query[1]}';"
             
         cursor.execute(select_query)
         self.logger.debug('QUERY EXECUTED')
