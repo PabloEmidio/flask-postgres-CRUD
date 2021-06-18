@@ -1,0 +1,20 @@
+{% extends 'layout.jinja2' %}
+
+{% block content %}
+    {% for message in messages %}
+        <div class="message">
+            <h1 class="title">{{ message[1] }}</h1> 
+            <p class="author">{{ message[2] }}</p> 
+            <p class="message-text">{{ message[3] }}</p>
+            <form action="/message/{{ message[0] }}/" method="get">
+                <button>see</button>
+            </form>
+            <form action="/message/update/{{ message[0] }}/" method="get">
+                <button>update</button>
+            </form>
+            <form action="/message/{{ message[0] }}/" method="post">
+                <button>remove</button>
+            </form>
+        </div>
+    {% endfor %}
+{% endblock %}}    
