@@ -1,0 +1,23 @@
+{% extends 'layout.jinja2' %}
+
+{% block style %}}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/forms.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="message">
+        <h1 class="title">{{ message[1] }}</h1> 
+        <p class="data">{% for date_item in message[4] %}<span>{{date_item}}</span>{% endfor %}</p> 
+        <p class="author">{{ message[2] }}</p> 
+        <p class="message-text">{{ message[3] }}</p>
+    </div>
+    <form class="form" action="/message/update/{{ message[0] }}/" method="post">
+        <label class="update-label">Title: <br><input type="text" name="title" id="title" maxlength="30"></label>
+        <label class="update-label">Author: <br><input type="text" name="author" id="author" maxlength="30"></label>
+        <label class="update-label">Message: <br><textarea name="message" id="message" cols="30" rows="10" maxlength="200"></textarea></label>
+        <button>UPDATE</button>
+    </form>
+    {% if warning %}
+        <p class="warning center">{{warning}}</p>
+    {% endif %}
+{% endblock %}
