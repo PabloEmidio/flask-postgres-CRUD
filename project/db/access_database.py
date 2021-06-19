@@ -21,15 +21,38 @@ class AccessDataBase(ConfigDatabase):
         conn.commit()
         self.logger.debug('CLASS AccessDataBase INITED')
         
-    def store_data(self, message_json):
-        try:
-            self.logger.debug(f'START STORE DATA')
-            self.write_data(message_json)
-            self.logger.debug('MESSAGE WROTE')
-            print(self.get_data())
-            self.logger.debug('MESSAGE READ')
-        except Exception as error: 
-            self.logger.error(f'{error}')
+        
+    def get_messages(self, indice: int=0, column_to_order: str='message_title'):
+        self.logger.debug('GETTING DATAS')
+        conn = psycopg2.connect(**self.postgres_access)
+        self.logger.debug('DB CONNECTED')
+        cursor = conn.cursor()
+        select_query = f"SELECT * FROM {self.table_name} ORDER BY {column_to_order} ASC;"
+        cursor.execute(select_query)
+        self.logger.debug('QUERY EXECUTED')
+        datas = cursor.fetchall()
+        cursor.close()
+        conn.commit()
+        self.logger.debug('RETURNING DATAS')
+        if indice:
+            end = indice*3-1; start = end-2
+            return datas[start:end+1]
+        else: return datas
+    
+
+    def get_message_by_condition(self, target_query: List[Union[int, str]]=[]):
+        self.logger.debug('GETTING DATA')
+        conn = psycopg2.connect(**self.postgres_access)
+        self.logger.debug('DB CONNECTED')
+        cursor = conn.cursor()
+        select_query = f"select * from {self.table_name} where {target_query[0]} = '{target_query[1]}';"
+        cursor.execute(select_query)
+        self.logger.debug('QUERY EXECUTED')
+        data = cursor.fetchone()
+        cursor.close()
+        conn.commit()
+        self.logger.debug('RETURNING DATA')
+        return data
     
     
     def write_data(self, message_json):
