@@ -78,19 +78,19 @@ def init_app(app: Flask):
                     warning = 'Title must not have more than 30 character'
                     return render_template('update.jinja2', message=message, warning=warning)
                 args = ['message_title', message_json['message_title']]
-                dbobj.update(message_id, args)
+                dbobj.update_message(message_id, args)
             if message_json['author_name']:
                 if len(message_json['author_name'])>30:
                     warning = 'Author must not have more than 30 character'
                     return render_template('update.jinja2', message=message, warning=warning)
                 args = ['author_name', message_json['author_name']]
-                dbobj.update(message_id, args)
+                dbobj.update_message(message_id, args)
             if message_json['message_text']:
                 if len(message_json['message_text'])>200:
                     warning = 'Message must not have more than 200 character'
                     return render_template('update.jinja2', message=message, warning=warning)
                 args = ['message_text', message_json['message_text']]
-                dbobj.update(message_id, args)
+                dbobj.update_message(message_id, args)
             return redirect(f'/message/{message_id}/')
         else:
             return render_template('update.jinja2', message=message, title=f'UPDATE | {message[1]}') if message else 'Not Found', 404
@@ -108,7 +108,7 @@ def init_app(app: Flask):
     @app.route('/message/remove/<int:message_id>/', methods=['POST'])
     def delete_message(message_id):
         dbobj = AccessDataBase()
-        dbobj.remove_data(message_id)
+        dbobj.remove_message(message_id)
         return redirect('/messages/1/')
         
         

@@ -72,7 +72,7 @@ class AccessDataBase(ConfigDatabase):
         self.logger.debug('SUCCESS')
     
     
-    def update(self, message_id, args: list):
+    def update_message(self, message_id, args: list):
         self.logger.debug('UPDATE DATAS')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
@@ -84,7 +84,7 @@ class AccessDataBase(ConfigDatabase):
         conn.commit()
         
     
-    def remove(self, message_id):
+    def remove_message(self, message_id):
         self.logger.debug('REMOVING DATA')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
