@@ -27,7 +27,7 @@ class AccessDataBase(ConfigDatabase):
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
         cursor = conn.cursor()
-        select_query = f"SELECT * FROM {self.table_name} ORDER BY creation_date ASC;"
+        select_query = f"SELECT * FROM {self.table_name} ORDER BY creation_date DESC;"
         cursor.execute(select_query)
         self.logger.debug('QUERY EXECUTED')
         datas = cursor.fetchall()
