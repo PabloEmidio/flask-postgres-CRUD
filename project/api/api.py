@@ -42,16 +42,10 @@ def init_app(app: Flask):
                     return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
                 if len(message_json['message_title'])>30:
                     warning = 'Title must not have more than 30 character'
-                    return render_template('update.jinja2', message=message, warning=warning)
-                args = ['message_title', message_json['message_title']]
-                dbobj.update_message(message_id, args)
-            if message_json['author_name']:
+                    return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
                 if len(message_json['author_name'])>30:
                     warning = 'Author must not have more than 30 character'
-                    return render_template('update.jinja2', message=message, warning=warning)
-                args = ['author_name', message_json['author_name']]
-                dbobj.update_message(message_id, args)
-            if message_json['message_text']:
+                    return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
                 if len(message_json['message_text'])>200:
                     warning = 'Message must not have more than 200 character'
                     return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
@@ -131,4 +125,9 @@ def init_app(app: Flask):
         
     @app.errorhandler(404)
     def not_found(error):
-        return render_template('404.jinja2', title='CRUD | NOT FOUND'), 404
+        return render_template('error.jinja2', title='CRUD | NOT FOUND', warning=error), 404
+    
+    
+    @app.errorhandler(500)
+    def server_error(error):
+        return render_template('error.jinja2', title='CRUD | NOT FOUND', warning=error), 500
