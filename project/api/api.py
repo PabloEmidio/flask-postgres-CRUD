@@ -114,4 +114,4 @@ def init_app(app: Flask):
         
     @app.errorhandler(404)
     def not_found(error):
-        return render_template('404.jinja2'), 404
+        return render_template('404.jinja2', title='CRUD | NOT FOUND'), 404
