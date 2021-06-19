@@ -19,7 +19,8 @@ def init_app(app: Flask):
             'messages': dbobj.get_messages(page_id),
             'title': 'Home | CRUD'
         }
-        return render_template('home.jinja2', **kwargs)
+        if kwargs['messages']: return render_template('home.jinja2', **kwargs)
+        else: return render_template('404.jinja2', title='CRUD | NOT FOUND'), 404
     
     @app.route('/message/create/', methods=['GET', 'POST'])
     def insert_message():
