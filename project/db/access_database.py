@@ -72,14 +72,14 @@ class AccessDataBase(ConfigDatabase):
         self.logger.debug('SUCCESS')
     
     
-    def remove_data(self, message_id):
-        self.logger.debug('REMOVING DATA')
+    def update(self, message_id, args: list):
+        self.logger.debug('UPDATE DATAS')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
         cursor = conn.cursor()
-        select_query = f'delete from {self.table_name} where message_id = {message_id};'
+        select_query = f"update {self.table_name} set {args[0]} = '{args[1]}' where message_id = {message_id};"            
         cursor.execute(select_query)
-        self.logger.debug('DELETE EXECUTED')
+        self.logger.debug('QUERY EXECUTED')
         cursor.close()
         conn.commit()
         
