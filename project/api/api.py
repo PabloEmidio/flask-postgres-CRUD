@@ -34,7 +34,7 @@ def init_app(app: Flask):
             if any(len(field)==0 for field in message_json.values()):
                 warning = 'It must not have field blank'
                 return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
-            if dbobj.get_data(['message_title', message_json['message_title']]):
+            if dbobj.get_message_by_condition(['message_title', message_json['message_title']]):
                 warning = 'Already exist message called ' + message_json['message_title']
                 return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
             if len(message_json['message_title'])>30:
