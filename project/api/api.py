@@ -9,7 +9,7 @@ def init_app(app: Flask):
     
     @app.route('/')
     def home():
-        return redirect('/messages/')
+        return redirect('/messages/1/')
 
     @app.route('/messages/', methods=['GET'])
     def get_messages():
