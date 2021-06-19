@@ -94,19 +94,20 @@ class AccessDataBase(ConfigDatabase):
         self.logger.debug('DELETE EXECUTED')
         cursor.close()
         conn.commit()
-        self.logger.debug('RETURNING DATAS')
-        return datas
         
-        
-    def update(self, message_id, args: list):
-        self.logger.debug('UPDATE DATAS')
+    
+    def get_message_length(self):
+        self.logger.debug('GETTING DATA')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
         cursor = conn.cursor()
-        select_query = f"update {self.table_name} set {args[0]} = '{args[1]}' where message_id = {message_id};"            
+        select_query = f"select count(*) from {self.table_name};"
         cursor.execute(select_query)
         self.logger.debug('QUERY EXECUTED')
+        data = cursor.fetchone()[0]
+        print(data)
         cursor.close()
         conn.commit()
-        
-            
+        self.logger.debug('RETURNING DATA')
+        return data
+
