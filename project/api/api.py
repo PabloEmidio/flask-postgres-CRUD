@@ -1,4 +1,5 @@
 from datetime import datetime
+from math import ceil
 
 from flask import Flask, request, render_template, redirect
 
@@ -14,7 +15,8 @@ def init_app(app: Flask):
     def get_messages():
         dbobj = AccessDataBase()
         kwargs = {
-            'messages': dbobj.get_data(),
+            'message_length_by_3': ceil(dbobj.get_message_length()/3),
+            'messages': dbobj.get_messages(page_id),
             'title': 'Home | CRUD'
         }
         return render_template('home.jinja2', **kwargs)
