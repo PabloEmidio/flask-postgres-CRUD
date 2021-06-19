@@ -48,9 +48,9 @@ def init_app(app: Flask):
                 return render_template('create.jinja2', warning=warning, title='CREATE | CRUD')
             message_json['creation_date'] = str(datetime.now().date())
             
-            dbobj.write_data(message_json)
-            create_now = dbobj.get_data()[-1][0]
-            return redirect(f'/message/{create_now}')
+            dbobj.insert_message(message_json)
+            created_now = dbobj.get_messages()[-1][0]
+            return redirect(f'/message/{created_now}')
         else:
             return render_template('create.jinja2', title='CREATE | CRUD')
         
