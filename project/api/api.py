@@ -57,7 +57,7 @@ def init_app(app: Flask):
     @app.route('/message/update/<int:message_id>/', methods=['GET', 'POST'])
     def update_message(message_id):
         dbobj = AccessDataBase()
-        db_info = dbobj.get_data(['message_id', message_id])[0]
+        db_info = dbobj.get_message_by_condition(['message_id', message_id])
         message = [item for item in db_info]
         message[4] = '/'.join(str(message[4]).split('-')[::-1])
         
@@ -70,7 +70,7 @@ def init_app(app: Flask):
             if  all(len(field)==0 for field in message_json.values()):
                 warning = 'One of them must be filled in'
                 return render_template('update.jinja2', message=message, warning=warning)
-            if dbobj.get_data(['message_title', message_json['message_title']]):
+            if dbobj.get_message_by_condition(['message_title', message_json['message_title']]):
                 warning = 'Already exist message called ' + message_json['message_title']
                 return render_template('update.jinja2', message=message, warning=warning)
             if message_json['message_title']:
