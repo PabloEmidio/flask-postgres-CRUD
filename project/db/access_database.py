@@ -55,17 +55,17 @@ class AccessDataBase(ConfigDatabase):
         return data
     
     
-    def write_data(self, message_json):
-        self.logger.debug(f'INSERT INTO {self.table_name} VALUES({message_json}) ')
+    def insert_message(self, message_rows: Dict[int, str]):
+        self.logger.debug(f'INSERT INTO {self.table_name} VALUES({message_rows}) ')
         conn = psycopg2.connect(**self.postgres_access)
         cursor = conn.cursor()
         select_query = f"INSERT INTO {self.table_name}" \
                         "(message_title, author_name, message_text, creation_date)" \
                         "VALUES(%s, %s, %s, %s);"
-        insert_tuple = (message_json['message_title'],
-                        message_json['author_name'],
-                        message_json['message_text'],
-                        message_json['creation_date'])
+        insert_tuple = (message_rows['message_title'],
+                        message_rows['author_name'],
+                        message_rows['message_text'],
+                        message_rows['creation_date'])
         cursor.execute(select_query, insert_tuple)
         cursor.close()
         conn.commit()
