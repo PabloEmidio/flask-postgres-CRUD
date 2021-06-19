@@ -97,17 +97,21 @@ def init_app(app: Flask):
 
     
     @app.route('/message/<int:message_id>/', methods=['GET', 'POST'])
-    def access_or_delete_message(message_id):
+    def access_message(message_id):
         dbobj = AccessDataBase()
-        if request.method == 'POST':
-            dbobj.remove_data(message_id)
-            return redirect('/messages/')
-        else:
-            db_info = dbobj.get_data(['message_id', message_id])[0]
-            message = [item for item in db_info]
-            message[4] = '/'.join(str(message[4]).split('-')[::-1])
-            return render_template('see.jinja2', message=message, title=f'SEE | {message[1]}') if message else 'Not Found', 404
+        db_info = dbobj.get_message_by_condition(['message_id', message_id])
+        message = [item for item in db_info]
+        message[4] = '/'.join(str(message[4]).split('-')[::-1])
+        return render_template('see.jinja2', message=message, title=f'SEE | {message[1]}')
     
+
+    @app.route('/message/remove/<int:message_id>/', methods=['POST'])
+    def delete_message(message_id):
+        dbobj = AccessDataBase()
+        dbobj.remove_data(message_id)
+        return redirect('/messages/1/')
+        
+        
     @app.errorhandler(404)
     def not_found(error):
         return render_template('404.jinja2'), 404
