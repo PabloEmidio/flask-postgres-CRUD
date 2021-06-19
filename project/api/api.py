@@ -11,8 +11,8 @@ def init_app(app: Flask):
     def home():
         return redirect('/messages/1/')
 
-    @app.route('/messages/', methods=['GET'])
-    def get_messages():
+    @app.route('/messages/<int:page_id>/', methods=['GET'])
+    def get_messages(page_id):
         dbobj = AccessDataBase()
         kwargs = {
             'message_length_by_3': ceil(dbobj.get_message_length()/3),
