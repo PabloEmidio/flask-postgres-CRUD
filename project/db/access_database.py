@@ -83,18 +83,15 @@ class AccessDataBase(ConfigDatabase):
         cursor.close()
         conn.commit()
         
-        
-    def get_data(self, target_query: List[Union[int, str]]=[]):
-        self.logger.debug('GETTING DATAS')
+    
+    def remove(self, message_id):
+        self.logger.debug('REMOVING DATA')
         conn = psycopg2.connect(**self.postgres_access)
         self.logger.debug('DB CONNECTED')
         cursor = conn.cursor()
-        if not target_query: select_query = f'select * from {self.table_name};'
-        else: select_query = f"select * from {self.table_name} where {target_query[0]} = '{target_query[1]}';"
-            
+        select_query = f'delete from {self.table_name} where message_id = {message_id};'
         cursor.execute(select_query)
-        self.logger.debug('QUERY EXECUTED')
-        datas = cursor.fetchall()
+        self.logger.debug('DELETE EXECUTED')
         cursor.close()
         conn.commit()
         self.logger.debug('RETURNING DATAS')
