@@ -20,7 +20,7 @@ def init_app(app: Flask):
             'title': 'Home | CRUD'
         }
         if kwargs['messages']: return render_template('home.jinja2', **kwargs)
-        else: return render_template('404.jinja2', title='CRUD | NOT FOUND'), 404
+        else: return render_template('error.jinja2', title='CRUD | NOT FOUND'), 404
     
     @app.route('/message/create/', methods=['GET', 'POST'])
     def insert_message():

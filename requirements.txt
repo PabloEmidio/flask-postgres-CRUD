@@ -6,7 +6,5 @@ Flask==2.0.1
   - Werkzeug [required: >=2.0, installed: 2.0.1]
 gunicorn==20.1.0
   - setuptools [required: >=3.0, installed: 56.0.0]
-pipdeptree==2.0.0
-  - pip [required: >=6.0.0, installed: 21.1.1]
-psycopg2==2.8.6
+psycopg2-binary==2.9.1
 python-dotenv==0.17.1
